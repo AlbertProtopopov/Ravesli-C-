@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> 
  
 class Parent
 {
@@ -7,7 +7,7 @@ public:
     {
         std::cout << "Calling Parent()" << std::endl;
     }
-    virtual~Parent() // примечание: Деструктор не виртуальный
+    virtual ~Parent() // !! Если не сделать деструктор виртуальным, то ~Child() не будет вызываться при 'delete parent' !!
     {
         std::cout << "Calling ~Parent()" << std::endl;
     }
@@ -25,7 +25,7 @@ public:
         m_array = new int[length];
     }
  
-    virtual~Child() // примечание: Деструктор не виртуальный
+    ~Child() // деструктор виртуальный
     {
         std::cout << "Calling ~Child()" << std::endl;
         delete[] m_array;
@@ -34,10 +34,11 @@ public:
  
 int main()
 {
-    Child *child = new Child(7);
+    Child * child = new Child(7);;
     //delete child;
     Parent *parent = child;
     delete parent;
+    parent = nullptr;
  
     return 0;
 }
