@@ -25,7 +25,7 @@ public:
         m_array = new int[length];
     }
  
-    ~Child() // деструктор виртуальный
+    virtual~Child() // деструктор виртуальный
     {
         std::cout << "Calling ~Child()" << std::endl;
         delete[] m_array;
